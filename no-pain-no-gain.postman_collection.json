@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "92a2bbe5-b328-473b-9745-fe0ad6c55551",
+		"name": "no-pain-no-gain",
+		"description": "#casos \r\nse crea collection para los test de los casos de prueba del gym no-paint-no-gain",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "casos-de-prueba",
+			"item": [
+				{
+					"name": "Inicio_de_sesion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gym?usuario=admin&password=admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gym"
+							],
+							"query": [
+								{
+									"key": "usuario",
+									"value": "admin"
+								},
+								{
+									"key": "password",
+									"value": "admin"
+								}
+							]
+						},
+						"description": "servicio usado para verificar que el usuario exista en la tabla tbl_usuario"
+					},
+					"response": []
+				},
+				{
+					"name": "Registro_Usuario_Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"rol\": 1,\r\n    \"correo\": \"franco@gmail.com\",\r\n    \"nombre\":\"franco\",\r\n    \"apellido\":\"villada\",\r\n    \"cedula\":1889909,\r\n    \"usuario\":\"franco\",\r\n    \"password\":\"franco\",\r\n    \"idSede\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/gym",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gym"
+							]
+						},
+						"description": "Servicio que permite registrar los usuarios si el usuario es cliente se le agrega el parametro idsede debe ser un numero para indicar en que sede se va a inscribir se le manda idrol 1 porque es un cliente"
+					},
+					"response": []
+				},
+				{
+					"name": "Registro_usuario_admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"rol\": 2,\r\n    \"correo\": \"jhon@gmail.com\",\r\n    \"nombre\":\"jhon\",\r\n    \"apellido\":\"valderrama\",\r\n    \"cedula\":19899089,\r\n    \"usuario\":\"jhon\",\r\n    \"password\":\"jhon\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/gym",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gym"
+							]
+						},
+						"description": "usuario administrador"
+					},
+					"response": []
+				},
+				{
+					"name": "registro_ciudades",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"ciudad\": \"Medellin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/gym/ciudad",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gym",
+								"ciudad"
+							]
+						},
+						"description": "servicio que permite registrar las ciudades"
+					},
+					"response": []
+				},
+				{
+					"name": "reqgistro_sede",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"ciudad\":1,\r\n    \"nit\":\"J-1234564\",\r\n    \"nombreSede\": \"no-pain-no-gain Cali\",\r\n    \"direccion\": \"tv 45b#86-40\"\r\n     \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/gym/sede",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gym",
+								"sede"
+							]
+						},
+						"description": "Servicio permite registrar una sede"
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta_usuarios_registrados _determinada_sede",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gym/consultaclienteporsede?idSede=3&idCiudad=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gym",
+								"consultaclienteporsede"
+							],
+							"query": [
+								{
+									"key": "idSede",
+									"value": "3"
+								},
+								{
+									"key": "idCiudad",
+									"value": "1"
+								}
+							]
+						},
+						"description": "permite consultar al cliente por sede y ciudad"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
