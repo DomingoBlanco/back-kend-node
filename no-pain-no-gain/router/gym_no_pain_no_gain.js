@@ -5,7 +5,10 @@ const {
     usuariosPost,
     ciudadesPost,
     sedePost,
-    clienteSedeGet
+    clienteSedeGet,
+    allUsuarios,
+    allSedes,
+    allCiudades
 } = require('../controllers/controller_api');
 
 const router = Router();
@@ -14,6 +17,12 @@ const router = Router();
 router.get('/', usuariosGet);
 
 router.get('/consultaclienteporsede/', clienteSedeGet);
+
+router.get('/allUsuarios/', allUsuarios);
+
+router.get('/allSedes/', allSedes);
+
+router.get('/allCiudades/', allCiudades);
 
 router.post('/', usuariosPost);
 

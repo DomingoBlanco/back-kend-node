@@ -1,0 +1,96 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+    <li *ngFor="let err of errores">
+        {{ err }}
+    </li>
+</ul>
+<div class="card bg-dark text-white">
+    <div class="card-header"></div>
+    <div class="card-body">
+        <form #sedeForm="ngForm">
+            <div class="form-group row">
+                <label for="nombreSede" class="col-form-label col-sm-2">Nombre Sede</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control " [(ngModel)]="sede.nombreSede" name="nombreSede" placeholder="Ingresar Nombre de la sede" required minlength="4" #nombreSede="ngModel">
+
+                    <div class="alert alert-danger" *ngIf="nombreSede.invalid && (nombreSede.dirty && nombreSede.touched)">
+                        <div *ngIf="nombreSede.errors.required">
+                            El campo nombre sede es requerido
+                        </div>
+                        <div *ngIf="nombreSede.errors.minlength">
+                            El campo nombre sede debe tener al menos 4 caracteres
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="Nit" class="col-form-label col-sm-2">Nit</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control " [(ngModel)]="sede.nit" name="nit" placeholder="Ingresar Nit" required minlength="4" #nit="ngModel">
+
+                    <div class="alert alert-danger" *ngIf="nit.invalid && (nit.dirty && nit.touched)">
+                        <div *ngIf="nit.errors.required">
+                            El campo nit es requerido
+                        </div>
+                        <div *ngIf="nit.errors.minlength">
+                            El campo nit debe tener al menos 4 caracteres
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="Ciudad" class="col-form-label col-sm-2">Ciudad Sede</label>
+                <div class="col-sm-6">
+                    <select [(ngModel)]="sede.ciudad" name="ciudad" required #ciudad="ngModel">
+                        <option *ngFor="let city of ciudades" [ngValue]="city.idCiudad">
+                            {{ city.descripcionCiudad }}
+                        </option>
+                    </select>
+
+                    <div [hidden]="ciudad.valid || ciudad.pristine" class="alert alert-danger">
+
+                        El campo sede es requerido
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="Dirección" class="col-form-label col-sm-2">Direcci&oacute;n</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control " [(ngModel)]="sede.direccion" name="direccion" required minlength="4" maxlength="400" #direccion="ngModel">
+
+                    <div class="alert alert-danger" *ngIf="direccion.invalid && (direccion.dirty && direccion.touched)">
+                        <div *ngIf="direccion.errors.required">
+                            El campo direccion es requerido
+                        </div>
+                        <div *ngIf="direccion.errors.minlength">
+                            El campo direccion debe tener al menos 4 caracteres
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-group row">
+                <label for="button" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-6">
+                    <button class="btn btn-primary" role="button" name="button" (click)='createSede()' [disabled]="!sedeForm.form.valid">Crear</button>
+
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>

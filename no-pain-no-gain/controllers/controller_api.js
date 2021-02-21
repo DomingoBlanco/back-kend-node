@@ -4,11 +4,11 @@ const mysql = require('mysql');
 
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'no_pain_no_gains',
-    port: 3306
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
+    port: process.env.PORTS
 });
 
 connection.connect(function(error) {
@@ -83,7 +83,7 @@ const usuariosPost = (req = request, res = response) => {
     connection.query(process.env.EXISTE_USUARIO, [correo, usuario, cedula], function(err, rows, fields) {
 
         if (rows.length < 1) {
-
+            console.log('rol', rol, 'idSede', idSede, 'correo', correo, 'nombre', nombre, 'apellido', apellido, 'cedula', cedula, 'usuario', usuario, 'password', password);
             connection.query(process.env.INSERT_USUARIO, [rol, correo, nombre, apellido, cedula, usuario, password], function(err, rows, fields) {
 
                 if (rows.length < 1) {
@@ -124,7 +124,7 @@ const usuariosPost = (req = request, res = response) => {
 
                 connection.query(process.env.INSERT_CLIENTE_SEDE, [idSede, cedula], function(error, row, field) {
 
-                    console.log('cliente relacionado con la sede');
+                    console.log('cliente relacionado con la sede =>' + idSede + ' cedula ' + cedula);
 
                 });
 
@@ -186,7 +186,7 @@ const ciudadesPost = (req = request, res = response) => {
 const sedePost = (req = request, res = response) => {
 
     const { ciudad, nit, nombreSede, direccion } = req.body;
-
+    console.log('ciudad', ciudad, 'nit', nit, 'nombreSede', nombreSede, 'direccion', direccion);
 
     connection.query(process.env.INSERT_SEDE, [ciudad, nit, nombreSede, direccion], function(err, rows, fields) {
 
@@ -267,6 +267,96 @@ const clienteSedeGet = (req = request, res = response) => {
 }
 
 
+const allUsuarios = (req = request, res = response) => {
+
+    connection.query(process.env.CONSULTA_ALL_USUARIO, [req], function(err, rows, fields) {
+
+        if (rows.length < 1) {
+            res.status(400).json({
+                msg: 'get API no se encontro registro ocurrio algun error en la BD'
+            });
+
+        }
+
+        if (err) {
+            res.status(400).json({
+                msg: 'get API no se encontro registro ocurrio algun error en la BD'
+            });
+
+        } else {
+
+            console.log('numero de filas ' + rows.length)
+            res.status(200).json({ rows });
+
+        }
+
+
+    });
+
+}
+
+
+
+const allSedes = (req = request, res = response) => {
+
+    connection.query(process.env.CONSULTA_SEDES, [req], function(err, rows, fields) {
+
+        if (rows.length < 1) {
+            res.status(400).json({
+                msg: 'get API no se encontro registro ocurrio algun error en la BD'
+            });
+
+        }
+
+        if (err) {
+            res.status(400).json({
+                msg: 'get API no se encontro registro ocurrio algun error en la BD'
+            });
+
+        } else {
+
+            console.log('sedes numero de filas ' + rows.length)
+            res.status(200).json({ rows });
+
+        }
+
+
+    });
+
+}
+
+
+const allCiudades = (req = request, res = response) => {
+
+    connection.query(process.env.CONSULTA_CIUDADES, [req], function(err, rows, fields) {
+        console.log('ciudades numero filas' + rows.length)
+        if (rows.length < 1) {
+            res.status(400).json({
+                msg: 'get API no se encontro registro ocurrio algun error en la BD'
+            });
+
+        }
+
+        if (err) {
+            res.status(400).json({
+                msg: 'get API no se encontro registro ocurrio algun error en la BD'
+            });
+
+        } else {
+
+            console.log('numero de filas ' + rows.length)
+            res.status(200).json({ rows });
+
+        }
+
+
+    });
+
+}
+
+
+
+
 
 
 module.exports = {
@@ -274,5 +364,8 @@ module.exports = {
     usuariosPost,
     ciudadesPost,
     sedePost,
-    clienteSedeGet
+    clienteSedeGet,
+    allUsuarios,
+    allSedes,
+    allCiudades
 }

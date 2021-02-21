@@ -1,0 +1,46 @@
+<div class="card border-primary mb-3">
+    <div class="card-header">Clientes</div>
+    <div class="card-body text-primary">
+        <h5 class="card-title">Listados de Clientes</h5>
+        <div class="my-2 text-left ">
+            <div style="float:left;margin-left:5px;">
+                <button type="button" class="btn btn-rounded btn-primary" [routerLink]="['/clientes/form']">Crear Clientes</button>
+            </div>
+            <div style="float:left;margin-left:5px;">
+                <button type="button" class="btn btn-rounded btn-primary" [routerLink]="['/clientes/formsede']">Crear Sedes</button>
+            </div>
+            <div style="float:left;margin-left:5px;">
+                <button type="button" class="btn btn-rounded btn-primary" [routerLink]="['/clientes/formciudad']">Crear Ciudades</button>
+            </div>
+        </div>
+
+        <div class="alert alert-info" *ngIf="clientes?.length==0">
+            No hay registros de clientes en la base de datos
+        </div>
+        <table class="table table-bordered table-striped text-primary" *ngIf="clientes?.length>0">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Cedula</th>
+                    <th>Email</th>
+                    <th>Perfil</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientes">
+                    <td>{{cliente.id_usuario}}</td>
+                    <td>{{cliente.nombre}}</td>
+                    <td>{{cliente.apellido}}</td>
+                    <td>{{cliente.cedula}}</td>
+                    <td>{{cliente.correo}}</td>
+                    <td>{{cliente.descripcion_rol}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

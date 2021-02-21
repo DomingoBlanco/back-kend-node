@@ -1,0 +1,169 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+    <li *ngFor="let err of errores">
+        {{ err }}
+    </li>
+</ul>
+<div class="card bg-dark text-white">
+    <div class="card-header"></div>
+    <div class="card-body">
+        <form #clienteForm="ngForm">
+            <div class="form-group row">
+                <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control " [(ngModel)]="cliente.nombre" name="nombre" placeholder="Ingresar Nombre" required minlength="4" #nombre="ngModel">
+
+                    <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty && nombre.touched)">
+                        <div *ngIf="nombre.errors.required">
+                            El campo nombre es requerido
+                        </div>
+                        <div *ngIf="nombre.errors.minlength">
+                            El campo nombre debe tener al menos 4 caracteres
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="Apellido" class="col-form-label col-sm-2">Apellido</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control " [(ngModel)]="cliente.apellido" name="apellido" placeholder="Ingresar Apellido" required minlength="4" #apellido="ngModel">
+
+                    <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty && apellido.touched)">
+                        <div *ngIf="apellido.errors.required">
+                            El campo apellido es requerido
+                        </div>
+                        <div *ngIf="apellido.errors.minlength">
+                            El campo apellido debe tener al menos 4 caracteres
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="Cedula" class="col-form-label col-sm-2">Cedula</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control " [(ngModel)]="cliente.cedula" name="cedula" required minlength="3" #cedula="ngModel">
+
+                    <div class="alert alert-danger" *ngIf="cedula.invalid && (cedula.dirty && cedula.touched)">
+                        <div *ngIf="cedula.errors.required">
+                            El campo cedula es requerido
+                        </div>
+                        <div *ngIf="cedula.errors.minlength">
+                            El campo cedula debe tener al menos 3 caracteres
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="correo" class="col-form-label col-sm-2">Email</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control " [(ngModel)]="cliente.correo" name="correo" placeholder="Ingresar email" required email #correo="ngModel">
+
+                    <div class="alert alert-danger" *ngIf="correo.invalid && (correo.dirty && apellido.touched)">
+                        <div *ngIf="correo.errors.required">
+                            El campo email es requerido
+                        </div>
+                        <div *ngIf="correo.errors.email">
+                            email invalido
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="Rol" class="col-form-label col-sm-2">Perfil</label>
+                <div class="col-sm-6">
+                    <select [(ngModel)]="cliente.rol" name="rol" required #rol="ngModel">
+                      
+                        <option  [ngValue]="1">Cliente</option>
+                        <option [ngValue]="2">Admin</option>
+          
+                   </select>
+
+                    <div [hidden]="rol.valid || rol.pristine" class="alert alert-danger" *ngIf="rol.invalid">
+                        El campo rol es requerido
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div *ngIf="cliente.rol == 2">
+
+                <div class="form-group row">
+                    <label for="Usuario" class="col-form-label col-sm-2">Usuario</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control " [(ngModel)]="cliente.usuario" name="usuario" required minlength="4" #usuario="ngModel">
+
+                        <div class="alert alert-danger" *ngIf="usuario.invalid && (usuario.dirty && usuario.touched)">
+                            <div *ngIf="usuario.errors.required">
+                                El campo usuario es requerido
+                            </div>
+                            <div *ngIf="usuario.errors.minlength">
+                                El campo usuario debe tener al menos 4 caracteres
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="Password" class="col-form-label col-sm-2">Password</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control " [(ngModel)]="cliente.password" name="password" required minlength="4" #password="ngModel">
+
+                        <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty && password.touched)">
+                            <div *ngIf="password.errors.required">
+                                El campo password es requerido
+                            </div>
+                            <div *ngIf="usuario.errors.minlength">
+                                El campo password debe tener al menos 4 caracteres
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+                <label for="Sede" class="col-form-label col-sm-2">Sede</label>
+                <div class="col-sm-6">
+                    <select [(ngModel)]="cliente.idSede" name="idSede" required #idSede="ngModel">
+                       <option *ngFor="let sede of sedes" [ngValue]="sede.idSede">
+                           {{ sede.nombreSede }}
+                       </option>
+                    </select>
+
+                    <div [hidden]="idSede.valid || idSede.pristine" class="alert alert-danger" *ngIf="idSede.invalid">
+
+                        El campo sede es requerido
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="button" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-6">
+                    <button class="btn btn-primary" role="button" name="button" (click)='create()' [disabled]="!clienteForm.form.valid">Crear</button>
+
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>

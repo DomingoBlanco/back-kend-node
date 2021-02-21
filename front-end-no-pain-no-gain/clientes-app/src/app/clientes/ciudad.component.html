@@ -1,0 +1,37 @@
+<div class="card border-primary mb-3">
+    <div class="card-header">Ciudades</div>
+    <div class="card-body text-primary">
+        <h5 class="card-title">Listados de Ciudades</h5>
+        <div class="my-2 text-left ">
+            <div style="float:left;margin-left:5px;">
+                <button type="button" class="btn btn-rounded btn-primary" [routerLink]="['/clientes/form']">Crear Clientes</button>
+            </div>
+            <div style="float:left;margin-left:5px;">
+                <button type="button" class="btn btn-rounded btn-primary" [routerLink]="['/clientes/formsede']">Crear Sedes</button>
+            </div>
+            <div style="float:left;margin-left:5px;">
+                <button type="button" class="btn btn-rounded btn-primary" [routerLink]="['/clientes/formciudad']">Crear Ciudades</button>
+            </div>
+        </div>
+
+        <div class="alert alert-info" *ngIf="city?.length==0">
+            No hay registros de sedes en la base de datos
+        </div>
+        <table class="table table-bordered table-striped text-primary" *ngIf="city?.length>0">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Ciudad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ciudad of city">
+                    <td>{{ciudad.idCiudad}}</td>
+                    <td>{{ciudad.descripcionCiudad}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
